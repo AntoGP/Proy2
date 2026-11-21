@@ -1,4 +1,4 @@
-crearTablero(filas, columnas):
+def crearTablero(filas, columnas):
     tablero = []
     for i in range(2 * filas - 1):
         fila = []
