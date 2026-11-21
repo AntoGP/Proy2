@@ -1,9 +1,8 @@
-def crearTablero(filas, columnas):
+crearTablero(filas, columnas):
     tablero = []
     for i in range(2 * filas - 1):
         fila = []
         for j in range(2 * columnas - 1):
-            # Solo las posiciones (par, par) son puntos
             if i % 2 == 0 and j % 2 == 0:
                 fila.append('+')
             else:
@@ -24,6 +23,7 @@ def imprimirTablero(tablero):
             etiqueta = "    "
         print((etiqueta + " ".join(fila)).rstrip())
     print()
+
 
 def mostrarMenu():
     print()
@@ -61,7 +61,6 @@ def convertirCoordenada(texto):
         return None
     return int(partes[0]), int(partes[1])
 
-
 def coordenadaValida(fila, columna, filas, columnas):
     return 1 <= fila <= filas and 1 <= columna <= columnas
 
@@ -86,6 +85,7 @@ def pedirJugada(filas, columnas):
     f2, c2 = pedirCoordenada("Ingrese destino: ", filas, columnas)
     return f1, c1, f2, c2
 
+
 def posicionLinea(f1, c1, f2, c2):
     if f1 == f2 and abs(c1 - c2) == 1:
         i = 2 * (f1 - 1)
@@ -101,13 +101,16 @@ def posicionLinea(f1, c1, f2, c2):
 def validarLinea(tablero, f1, c1, f2, c2):
     filas = (len(tablero) + 1) // 2
     columnas = (len(tablero[0]) + 1) // 2
+
     if not coordenadaValida(f1, c1, filas, columnas):
         return False
     if not coordenadaValida(f2, c2, filas, columnas):
         return False
+
     posicion = posicionLinea(f1, c1, f2, c2)
     if posicion is None:
         return False
+
     i, j, simbolo = posicion
     if tablero[i][j] != ' ':
         return False
@@ -119,10 +122,12 @@ def colocarLinea(tablero, f1, c1, f2, c2):
     if not validarLinea(tablero, f1, c1, f2, c2):
         print("Movimiento invalido. Intente nuevamente.")
         return False
+
     i, j, simbolo = posicionLinea(f1, c1, f2, c2)
     tablero[i][j] = simbolo
     print("Linea colocada correctamente.")
     return True
+
 
 def cerrarCajas(tablero, jugador):
     cerradas = 0
